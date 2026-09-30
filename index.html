@@ -669,8 +669,15 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-7">
-                    <form action="https://formspree.io/f/xaqradgb" method="POST"
+                    <form action="https://api.web3forms.com/submit" method="POST"
                         class="p-4 p-md-5 custom-card border-secondary border-opacity-10">
+
+                        <!-- Clé d'accès Web3Forms -->
+                        <input type="hidden" name="access_key" value="bdd6392d-4563-48ec-8abb-caf0968b80b4">
+
+                        <!-- Empêche le spam des robots (Champ caché) -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <input type="text" name="name"
