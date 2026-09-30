@@ -669,37 +669,40 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-7">
-                    <form action="https://api.web3forms.com/submit" method="POST"
-                        class="p-4 p-md-5 custom-card border-secondary border-opacity-10">
+                    <form id="contactForm" class="p-4 p-md-5 custom-card border-secondary border-opacity-10">
 
                         <!-- Clé d'accès Web3Forms -->
                         <input type="hidden" name="access_key" value="bdd6392d-4563-48ec-8abb-caf0968b80b4">
 
-                        <!-- Empêche le spam des robots (Champ caché) -->
+                        <!-- Anti-spam -->
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <input type="text" name="name"
+                                <input type="text" name="name" id="name"
                                     class="form-control form-control-lg bg-dark text-white border-secondary border-opacity-30 p-3 fs-6"
                                     placeholder="Votre Nom" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="email" name="email"
+                                <input type="email" name="email" id="email"
                                     class="form-control form-control-lg bg-dark text-white border-secondary border-opacity-30 p-3 fs-6"
                                     placeholder="Votre Email" required>
                             </div>
                             <div class="col-12 mt-3">
-                                <textarea name="message"
+                                <textarea name="message" id="message"
                                     class="form-control bg-dark text-white border-secondary border-opacity-30 p-3 fs-6"
                                     rows="5" placeholder="Votre Message" required></textarea>
                             </div>
                             <div class="col-12 mt-4">
-                                <button type="submit" class="btn btn-gradient btn-lg w-100 py-3 rounded-pill fw-bold">
+                                <button type="submit" id="submitBtn"
+                                    class="btn btn-gradient btn-lg w-100 py-3 rounded-pill fw-bold">
                                     <i class="bi bi-send me-2"></i>Envoyer le message
                                 </button>
                             </div>
                         </div>
+
+                        <!-- Message de confirmation ou d'erreur -->
+                        <div id="formResponse" class="mt-3 text-center"></div>
                     </form>
                 </div>
             </div>
@@ -778,6 +781,53 @@
                 },
                 "retina_detect": true
             });
+        });
+
+
+
+        //contact vide
+        const form = document.getElementById('contactForm');
+        const formResponse = document.getElementById('formResponse');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Empêche le rechargement/redirection de la page
+
+            // Indiquer l'envoi en cours sur le bouton
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Envoi en cours...';
+
+            const formData = new FormData(form);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+                .then(async (response) => {
+                    let json = await response.json();
+                    if (response.status == 200) {
+                        // Afficher le message de succès
+                        formResponse.innerHTML = `<span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-2"></i>Message envoyé avec succès !</span>`;
+
+                        // Vider tous les champs du formulaire
+                        form.reset();
+                    } else {
+                        formResponse.innerHTML = `<span class="text-danger">${json.message}</span>`;
+                    }
+                })
+                .catch(error => {
+                    formResponse.innerHTML = `<span class="text-danger">Une erreur est survenue. Veuillez réessayer.</span>`;
+                })
+                .then(function () {
+                    // Réactiver le bouton
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="bi bi-send me-2"></i>Envoyer le message';
+
+                    // Effacer le message de confirmation après 5 secondes
+                    setTimeout(() => {
+                        formResponse.innerHTML = "";
+                    }, 5000);
+                });
         });
     </script>
 </body>
