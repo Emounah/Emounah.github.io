@@ -10,7 +10,6 @@
     rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #070b1a;
@@ -255,7 +254,6 @@
       height: 100%;
       border-radius: 50%;
       padding: 8px;
-      /* background: var(--bg-dark); */
       background: #122640;
       overflow: hidden
     }
@@ -559,10 +557,188 @@
       transform: none
     }
 
+    /* animation par section */
+    .rv {
+      --tx: 0px;
+      --ty: calc(var(--dist, 60px)*var(--sgn, 1));
+      --s: .97;
+      transition: opacity .9s cubic-bezier(.22, .8, .2, 1), transform .9s cubic-bezier(.22, .8, .2, 1)
+    }
+
+    .sec.is-above {
+      --sgn: -1
+    }
+
+    .sec .rv[data-rv=fade-right] {
+      --tx: -70px;
+      --ty: 0px
+    }
+
+    .sec .rv[data-rv=fade-left] {
+      --tx: 70px;
+      --ty: 0px
+    }
+
+    .sec .rv[data-rv=zoom-in] {
+      --tx: 0px;
+      --ty: 0px;
+      --s: .85
+    }
+
+    .sec .rv[data-rv=zoom] {
+      --tx: 0px;
+      --ty: 0px;
+      --s: .92
+    }
+
+    .sec:not(.in-view) .rv {
+      opacity: 0;
+      transform: translate(var(--tx), var(--ty)) scale(var(--s));
+      transition-duration: .7s;
+      transition-timing-function: ease-in;
+      transition-delay: calc(var(--d, 0ms)*.25)
+    }
+
+    .sec.in-view .rv {
+      opacity: 1;
+      transform: none;
+      transition-delay: var(--d, 0ms)
+    }
+
+    /* 1. Hero : zoom doux + cascade */
+    #accueil.in-view .rv {
+      transition-duration: 1s
+    }
+
+    /* 2. Présentation : glissement croisé (gauche / droite) */
+    #a-propos .rv[data-rv=fade-right] {
+      --tx: -60px
+    }
+
+    #a-propos .rv[data-rv=fade-left] {
+      --tx: 60px
+    }
+
+    #a-propos.in-view .rv {
+      transition-duration: 1.2s
+    }
+
+    /* 3. Expertise : cascade du bas vers le haut, effet ressort */
+    #competences {
+      --dist: 40px;
+      --spring: cubic-bezier(.34, 1.56, .64, 1)
+    }
+
+    #competences .rv {
+      transition-timing-function: var(--spring)
+    }
+
+    #competences:not(.in-view) .rv {
+      transition-timing-function: ease-in
+    }
+
+    #competences .rb {
+      transition: opacity .8s var(--spring), translate .8s var(--spring), transform .3s, border-color .3s, box-shadow .3s
+    }
+
+    #competences:not(.in-view) .rb {
+      opacity: 0;
+      translate: 0 calc(var(--dist)*var(--sgn, 1));
+      transition: opacity .6s ease-in calc(var(--d, 0ms)*.3), translate .6s ease-in calc(var(--d, 0ms)*.3), transform .3s, border-color .3s, box-shadow .3s
+    }
+
+    #competences.in-view .rb {
+      opacity: 1;
+      translate: 0 0;
+      transition-delay: var(--d, 0ms), var(--d, 0ms), 0s, 0s, 0s
+    }
+
+    /* 4. Réalisations : perspective 3D qui se redresse */
+    #projets {
+      --dist: 50px
+    }
+
+    #projets .rv[data-rv=zoom-in] {
+      transform-origin: 50% 100%
+    }
+
+    #projets:not(.in-view) .rv[data-rv=zoom-in] {
+      transform: perspective(1000px) rotateX(calc(12deg*var(--sgn, 1))) translateY(calc(50px*var(--sgn, 1)))
+    }
+
+    #projets.in-view .rv[data-rv=zoom-in] {
+      transform: perspective(1000px) rotateX(0deg) translateY(0px);
+      transition-duration: 1.1s
+    }
+
+    /* 5. Contact : élévation + aura lumineuse */
+    #contact {
+      --dist: 30px;
+      position: relative;
+      overflow: hidden
+    }
+
+    #contact .container {
+      position: relative;
+      z-index: 1
+    }
+
+    #contact::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 60%;
+      width: min(900px, 120%);
+      height: 520px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(closest-side, rgba(124, 92, 255, .25), rgba(34, 211, 238, .08) 60%, transparent);
+      opacity: 0;
+      transition: opacity 1.4s ease;
+      pointer-events: none
+    }
+
+    #contact.in-view::before {
+      opacity: 1
+    }
+
+    #contact:not(.in-view)::before {
+      transition-duration: .6s
+    }
+
+    #contact:not(.in-view) #contactForm {
+      transition: transform .4s, border-color .4s, box-shadow .5s ease
+    }
+
+    #contactForm {
+      box-shadow: 0 0 0 rgba(124, 92, 255, 0);
+      transition: transform .4s, border-color .4s, box-shadow 1.4s ease .5s
+    }
+
+    #contact.in-view #contactForm {
+      box-shadow: 0 0 60px -12px rgba(124, 92, 255, .55), 0 30px 70px -35px rgba(34, 211, 238, .45);
+      animation: aura 4.5s ease-in-out 2s infinite alternate
+    }
+
+    @keyframes aura {
+      to {
+        box-shadow: 0 0 90px -8px rgba(124, 92, 255, .75), 0 30px 80px -30px rgba(34, 211, 238, .6)
+      }
+    }
+
     @media (prefers-reduced-motion:reduce) {
       * {
         animation: none !important;
         transition: none !important
+      }
+
+      .rv {
+        opacity: 1 !important;
+        transform: none !important
+      }
+
+      .rb {
+        opacity: 1 !important;
+        translate: none !important
       }
     }
   </style>
@@ -595,7 +771,7 @@
     <div class="container">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-lg-7" data-aos="fade-right" data-aos-duration="1000">
-          <span class="status mb-4"><i></i> Disponible pour de nouveaux projets</span>
+          <!-- <span class="status mb-4"><i></i> Disponible pour de nouveaux projets</span> -->
           <h1 class="display-4 fw-extrabold mb-3 text-white">
             Bonjour, je suis <br class="d-none d-sm-inline">
             <span class="gradient-text d-block d-sm-inline">BOTRALAHY</span>
@@ -812,14 +988,41 @@
   <button id="toTop" aria-label="Retour en haut"><i class="bi bi-arrow-up"></i></button>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    AOS.init({ duration: 800, once: true });
-
     document.addEventListener("DOMContentLoaded", function () {
       var $ = function (s) { return document.querySelector(s) };
       var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* Animation par section : conversion des data-aos */
+      document.querySelectorAll("[data-aos]").forEach(function (el) {
+        var type = el.getAttribute("data-aos"), d = +(el.getAttribute("data-aos-delay") || 0);
+        var targets = el.classList.contains("container") ? [].slice.call(el.children) : [el];
+        targets.forEach(function (t, i) {
+          t.classList.add("rv"); t.setAttribute("data-rv", type);
+          t.style.setProperty("--d", (d + (t === el ? 0 : i * 140)) + "ms");
+        });
+        ["data-aos", "data-aos-delay", "data-aos-duration"].forEach(function (a) { el.removeAttribute(a) });
+      });
+
+      /* Hero : cascade titre, sous-titre, texte, boutons + zoom doux */
+      var hc = document.querySelector("#accueil .col-lg-7");
+      if (hc) {
+        hc.classList.remove("rv"); hc.removeAttribute("data-rv"); hc.style.removeProperty("--d");
+        [].slice.call(hc.children).forEach(function (el, i) {
+          el.classList.add("rv"); el.setAttribute("data-rv", "zoom"); el.style.setProperty("--d", (150 + i * 170) + "ms");
+        });
+        var hp = document.querySelector("#accueil .col-lg-5");
+        hp.setAttribute("data-rv", "zoom"); hp.style.setProperty("--d", "450ms");
+      }
+      /* Expertise : chaque badge apparaît l’un après l’autre */
+      var firstBadge = document.querySelector("#competences .skill-badge");
+      if (firstBadge) {
+        var bw = firstBadge.parentNode;
+        bw.classList.remove("rv"); bw.removeAttribute("data-rv"); bw.style.removeProperty("--d");
+        [].slice.call(bw.children).forEach(function (b, i) { b.classList.add("rb"); b.style.setProperty("--d", i * 60 + "ms") });
+      }
+
 
       /* ScrollSpy */
       /* Lien actif selon la section visible (remplace ScrollSpy) */
@@ -848,19 +1051,11 @@
         ["bi-tools", "CMS &amp; Outils", [["WordPress", 92], ["Git / GitHub", 85], ["Responsive Design", 90]]]
       ];
       $("#skills").innerHTML = groups.map(function (g, i) {
-        return '<div class="col-lg-4" data-aos="fade-up" data-aos-delay="' + i * 120 + '"><div class="custom-card p-4 h-100">' +
+        return '<div class="col-lg-4 rv" data-rv="fade-up" style="--d:' + (700 + i * 150) + 'ms"><div class="custom-card p-4 h-100">' +
           '<h5 class="fw-bold text-white mb-4"><i class="bi ' + g[0] + ' text-info me-2"></i>' + g[1] + '</h5>' +
           g[2].map(function (s) { return '<div class="mb-4"><div class="d-flex justify-content-between mb-2 small text-secondary"><span>' + s[0] + '</span><span class="sk-val">' + s[1] + '%</span></div><div class="progress"><div class="progress-bar" data-w="' + s[1] + '"></div></div></div>' }).join("") +
           '</div></div>';
       }).join("");
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          e.target.querySelectorAll(".progress-bar").forEach(function (b) { b.style.width = b.dataset.w + "%" });
-          io.unobserve(e.target);
-        });
-      }, { threshold: .3 });
-      document.querySelectorAll("#skills .custom-card").forEach(function (c) { io.observe(c) });
 
       /* Texte tapé */
       var words = ["Développeur Fullstack", "Spécialiste Laravel", "Expert WordPress", "Créateur d’interfaces"], wi = 0, ci = 0, del = false, t = $("#typed");
@@ -903,6 +1098,31 @@
         },
         retina_detect: true
       });
+
+      /* Animation par section : visible = apparaît, quittée = disparaît (selon le sens du défilement) */
+      var secEls = [].slice.call(document.querySelectorAll("header.hero-section, section"));
+      secEls.forEach(function (s) { s.classList.add("sec") });
+      var ticking = false;
+      function sectionsUpdate() {
+        ticking = false;
+        var vh = window.innerHeight;
+        secEls.forEach(function (s) {
+          var r = s.getBoundingClientRect(), on = s.classList.contains("in-view");
+          var vis = on ? (r.top < vh * .7 && r.bottom > vh * .4) : (r.top < vh * .65 && r.bottom > vh * .45);
+          s.classList.toggle("is-above", !vis && r.top < 0);
+          if (vis !== on) {
+            s.classList.toggle("in-view", vis);
+            s.querySelectorAll(".progress-bar").forEach(function (b) {
+              b.style.transitionDelay = vis ? "1200ms" : "0ms";
+              b.style.width = vis ? b.dataset.w + "%" : "0%";
+            });
+          }
+        });
+      }
+      function sectionsReq() { if (!ticking) { ticking = true; requestAnimationFrame(sectionsUpdate) } }
+      addEventListener("scroll", sectionsReq, { passive: true });
+      addEventListener("resize", sectionsReq);
+      setTimeout(sectionsUpdate, 150);
     });
 
     /* Formulaire (Web3Forms) */
