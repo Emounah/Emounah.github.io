@@ -357,6 +357,106 @@
       }
     }
 
+    /* hero : responsive petits écrans */
+    @media (max-width:991.98px) {
+      .hero-section {
+        padding: 104px 0 64px
+      }
+
+      .hero-section .row>.col-lg-5 {
+        order: -1;
+        margin-top: 0 !important;
+        margin-bottom: 2rem;
+        --d: 0ms !important
+      }
+
+      .hero-section .hero-photo {
+        width: min(62%, 280px)
+      }
+    }
+
+    @media (max-width:575.98px) {
+      .hero-section {
+        padding: 92px 0 48px
+      }
+
+      .hero-section .row>.col-lg-5 {
+        margin-bottom: 1.6rem
+      }
+
+      .hero-section .hero-photo {
+        width: min(56%, 210px)
+      }
+
+      .hero-section .hero-photo__ring {
+        inset: -4px
+      }
+
+      .hero-section .hero-photo__frame {
+        padding: 5px
+      }
+
+      .hero-section .hero-photo__chip {
+        font-size: .7rem;
+        padding: .32rem .65rem
+      }
+
+      .hero-section h1 {
+        font-size: clamp(1.65rem, 7.6vw, 2.2rem);
+        line-height: 1.18;
+        margin-bottom: .8rem !important
+      }
+
+      .hero-section .typed-line {
+        font-size: .98rem;
+        margin-bottom: .9rem !important
+      }
+
+      .hero-section .lead {
+        font-size: .9rem !important;
+        line-height: 1.65;
+        margin-bottom: 1.4rem !important;
+        max-width: 36ch !important
+      }
+
+      .hero-section .d-flex.flex-wrap {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: .6rem !important;
+        margin-top: 0 !important
+      }
+
+      .hero-section .d-flex.flex-wrap .btn {
+        padding: .78rem .6rem !important;
+        font-size: .85rem;
+        line-height: 1.2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center
+      }
+
+      .hero-section .d-flex.flex-wrap .btn i {
+        margin-right: .4rem !important
+      }
+
+      .hero-section .d-flex.flex-wrap .btn-gradient {
+        grid-column: 1/-1;
+        padding: .9rem 1rem !important;
+        font-size: .95rem
+      }
+    }
+
+    @media (max-width:359.98px) {
+      .hero-section h1 {
+        font-size: 1.55rem
+      }
+
+      .hero-section .d-flex.flex-wrap {
+        grid-template-columns: 1fr
+      }
+    }
+
     /* boutons */
     .btn-gradient {
       background: var(--grad);
