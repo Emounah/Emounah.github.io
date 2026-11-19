@@ -1,390 +1,929 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BOTRALAHY Solofoson Cécilien | Développeur Web Fullstack</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<style>
-:root{
-  --bg-dark:#070b1a;--bg-alt:#0c1226;--bg-card:#111a33;--line:rgba(120,140,220,.16);
-  --primary:#4f6bff;--a:#22d3ee;--b:#7c5cff;--c:#f472d0;
-  --text-main:#eef2ff;--text-secondary:#9aa6cc;
-  --grad:linear-gradient(120deg,var(--a),var(--b) 60%,var(--c));
-}
-html{scroll-behavior:smooth;overflow-x:hidden;scroll-padding-top:80px}
-body{font-family:Inter,sans-serif;background:var(--bg-dark);color:var(--text-main);overflow-x:hidden;padding-top:70px}
-h1,h2,h3,h4,.navbar-brand{font-family:Sora,Inter,sans-serif}
-.fw-extrabold{font-weight:800;letter-spacing:-.02em}
-.text-secondary{color:var(--text-secondary)!important}
-.bg-dark{background:var(--bg-alt)!important}
-:focus-visible{outline:2px solid var(--a);outline-offset:3px}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOTRALAHY Solofoson Cécilien | Développeur Web Fullstack</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #070b1a;
+      --bg-alt: #0c1226;
+      --bg-card: #111a33;
+      --line: rgba(120, 140, 220, .16);
+      --primary: #4f6bff;
+      --a: #22d3ee;
+      --b: #7c5cff;
+      --c: #f472d0;
+      --text-main: #eef2ff;
+      --text-secondary: #9aa6cc;
+      --grad: linear-gradient(120deg, var(--a), var(--b) 60%, var(--c));
+    }
 
-/* progression */
-#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:2000}
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      scroll-padding-top: 80px
+    }
 
-/* navbar */
-.navbar{backdrop-filter:blur(14px);background:rgba(7,11,26,.75)!important;border-bottom:1px solid var(--line)}
-.navbar-brand{font-weight:800;color:var(--text-main)!important}
-.navbar-brand span{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.navbar-nav .nav-link{color:var(--text-secondary);font-weight:500;padding:.55rem 1.1rem;border-radius:99px;transition:.3s}
-.navbar-nav .nav-link:hover{color:#fff;background:rgba(255,255,255,.06)}
-.navbar-nav .nav-link.active{color:#fff!important;background:var(--grad);box-shadow:0 6px 20px rgba(124,92,255,.4)}
+    body {
+      font-family: Inter, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      padding-top: 70px
+    }
 
-/* texte dégradé animé */
-.gradient-text{background:var(--grad);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;animation:shift 6s linear infinite}
-@keyframes shift{to{background-position:220% center}}
+    h1,
+    h2,
+    h3,
+    h4,
+    .navbar-brand {
+      font-family: Sora, Inter, sans-serif
+    }
 
-/* hero */
-.hero-section{padding:130px 0 90px;position:relative;overflow:hidden}
-.hero-bg-gradient{position:absolute;inset:0;z-index:-2;background:
-  radial-gradient(600px 400px at 15% 20%,rgba(34,211,238,.14),transparent 60%),
-  radial-gradient(700px 450px at 85% 70%,rgba(124,92,255,.18),transparent 60%);animation:drift 12s ease-in-out infinite alternate}
-@keyframes drift{to{transform:scale(1.12) translate(-2%,2%)}}
-#hero-particles{position:absolute;inset:0;z-index:-1}
-.status{display:inline-flex;align-items:center;gap:.6rem;padding:.5rem 1rem;border:1px solid var(--line);border-radius:99px;background:rgba(17,26,51,.7);font-size:.9rem;color:var(--text-secondary)}
-.status i{width:9px;height:9px;border-radius:50%;background:#34d399;animation:ping 2s infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 rgba(52,211,153,.7)}80%,100%{box-shadow:0 0 0 10px transparent}}
-.typed-line{font-family:Sora,sans-serif;font-size:1.2rem;color:var(--text-secondary);min-height:1.8em}
-.typed-line b{color:var(--a);font-weight:600}
-.caret{display:inline-block;width:2px;height:1.1em;background:var(--a);margin-left:3px;vertical-align:-3px;animation:blink 1s steps(2) infinite}
-@keyframes blink{50%{opacity:0}}
-.hero-icon{position:relative;display:inline-block;padding:2.2rem;border-radius:32px;border:1px solid var(--line);background:rgba(79,107,255,.08);animation:float 6s ease-in-out infinite}
-.hero-icon::before{content:"";position:absolute;inset:-2px;border-radius:34px;background:var(--grad);z-index:-1;filter:blur(30px);opacity:.45}
-.hero-icon i{font-size:6rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-@keyframes float{50%{transform:translateY(-16px) rotate(2deg)}}
+    .fw-extrabold {
+      font-weight: 800;
+      letter-spacing: -.02em
+    }
 
-/* boutons */
-.btn-gradient{background:var(--grad);color:#fff;border:0;transition:.3s;box-shadow:0 10px 30px -10px var(--b)}
-.btn-gradient:hover{color:#fff;transform:translateY(-3px);box-shadow:0 16px 36px -10px var(--b)}
-.btn-outline-light,.btn-outline-primary{transition:.3s}
-.btn-outline-light:hover,.btn-outline-primary:hover{transform:translateY(-3px)}
-.btn-cv{border:1px solid var(--a);color:var(--a)}
-.btn-cv:hover{background:var(--a);color:#07101f}
-.btn-cv i{display:inline-block;transition:transform .3s}
-.btn-cv:hover i{animation:down .7s infinite}
-@keyframes down{50%{transform:translateY(4px)}}
+    .text-secondary {
+      color: var(--text-secondary) !important
+    }
 
-/* cartes + spotlight souris */
-.custom-card{background:var(--bg-card);border:1px solid var(--line);border-radius:22px;transition:transform .4s,box-shadow .4s,border-color .4s;overflow:hidden;position:relative}
-.custom-card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
-  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(124,92,255,.18),transparent 70%)}
-.custom-card:hover::before{opacity:1}
-.custom-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -30px var(--b);border-color:rgba(124,92,255,.5)}
-.card-img-top{width:100%;height:auto;object-fit:contain;border-bottom:1px solid var(--line);transition:transform .6s}
-.proj-img{overflow:hidden;display:block}
-.custom-card:hover .card-img-top{transform:scale(1.05)}
+    .bg-dark {
+      background: var(--bg-alt) !important
+    }
 
-/* badges + barres */
-.skill-badge{background:var(--bg-card);color:var(--text-main);border:1px solid var(--line);padding:.65rem 1.3rem;border-radius:99px;font-weight:600;font-size:.92rem;display:inline-flex;align-items:center;gap:.55rem;transition:.3s}
-.skill-badge i{color:var(--a)}
-.skill-badge:hover{border-color:var(--a);transform:translateY(-4px);box-shadow:0 10px 24px -10px var(--a)}
-.progress{background:rgba(120,140,220,.14);height:9px;border-radius:99px}
-.progress-bar{background:var(--grad);border-radius:99px;width:0;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
-.sk-val{color:var(--text-main);font-weight:700}
+    :focus-visible {
+      outline: 2px solid var(--a);
+      outline-offset: 3px
+    }
 
-.contact-info-icon{width:46px;height:46px;border-radius:14px;background:var(--grad);display:grid;place-items:center;flex:none}
-.contact-info-icon i{color:#fff;font-size:1.15rem}
-.form-control{transition:.2s}
-.form-control:focus{border-color:var(--a)!important;box-shadow:0 0 0 4px rgba(34,211,238,.18)!important;background:var(--bg-dark)!important;color:#fff}
-.form-control::placeholder{color:#7f8bb5;opacity:1}
-footer{border-top:1px solid var(--line)}
+    /* progression */
+    #progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      background: var(--grad);
+      z-index: 2000
+    }
 
-/* retour en haut */
-#toTop{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;border:0;background:var(--grad);color:#fff;font-size:1.2rem;opacity:0;pointer-events:none;transform:translateY(12px);transition:.3s;z-index:1500}
-#toTop.show{opacity:1;pointer-events:auto;transform:none}
+    /* navbar */
+    .navbar {
+      backdrop-filter: blur(14px);
+      background: rgba(7, 11, 26, .75) !important;
+      border-bottom: 1px solid var(--line)
+    }
 
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+    .navbar-brand {
+      font-weight: 800;
+      color: var(--text-main) !important
+    }
+
+    .navbar-brand span {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent
+    }
+
+    .navbar-nav .nav-link {
+      color: var(--text-secondary);
+      font-weight: 500;
+      padding: .55rem 1.1rem;
+      border-radius: 99px;
+      transition: .3s
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .navbar-nav .nav-link.active {
+      color: #fff !important;
+      background: var(--grad);
+      box-shadow: 0 6px 20px rgba(124, 92, 255, .4)
+    }
+
+    /* texte dégradé animé */
+    .gradient-text {
+      background: var(--grad);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      animation: shift 6s linear infinite
+    }
+
+    @keyframes shift {
+      to {
+        background-position: 220% center
+      }
+    }
+
+    /* hero */
+    .hero-section {
+      padding: 130px 0 90px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero-bg-gradient {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(600px 400px at 15% 20%, rgba(34, 211, 238, .14), transparent 60%),
+        radial-gradient(700px 450px at 85% 70%, rgba(124, 92, 255, .18), transparent 60%);
+      animation: drift 12s ease-in-out infinite alternate
+    }
+
+    @keyframes drift {
+      to {
+        transform: scale(1.12) translate(-2%, 2%)
+      }
+    }
+
+    #hero-particles {
+      position: absolute;
+      inset: 0;
+      z-index: -1
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .5rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      background: rgba(17, 26, 51, .7);
+      font-size: .9rem;
+      color: var(--text-secondary)
+    }
+
+    .status i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #34d399;
+      animation: ping 2s infinite
+    }
+
+    @keyframes ping {
+      0% {
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, .7)
+      }
+
+      80%,
+      100% {
+        box-shadow: 0 0 0 10px transparent
+      }
+    }
+
+    .typed-line {
+      font-family: Sora, sans-serif;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      min-height: 1.8em
+    }
+
+    .typed-line b {
+      color: var(--a);
+      font-weight: 600
+    }
+
+    .caret {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: var(--a);
+      margin-left: 3px;
+      vertical-align: -3px;
+      animation: blink 1s steps(2) infinite
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0
+      }
+    }
+
+    /* photo hero */
+    .hero-photo {
+      position: relative;
+      isolation: isolate;
+      width: min(100%, 380px);
+      aspect-ratio: 1;
+      margin-inline: auto;
+      animation: photoFloat 6s ease-in-out infinite
+    }
+
+    .hero-photo::before {
+      content: "";
+      position: absolute;
+      inset: -12%;
+      border-radius: 50%;
+      background: var(--grad);
+      filter: blur(60px);
+      opacity: .35;
+      z-index: -2
+    }
+
+    .hero-photo__ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      z-index: -1;
+      background: conic-gradient(from 0deg, var(--a), var(--b), var(--c), var(--a));
+      animation: spin 8s linear infinite
+    }
+
+    .hero-photo__frame {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      padding: 8px;
+      /* background: var(--bg-dark); */
+      background: #122640;
+      overflow: hidden
+    }
+
+    .hero-photo__frame img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      transition: transform .8s cubic-bezier(.2, .8, .2, 1)
+    }
+
+    .hero-photo:hover .hero-photo__frame img {
+      transform: scale(1.07)
+    }
+
+    .hero-photo__chip {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .5rem .95rem;
+      border-radius: 99px;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--text-main);
+      background: rgba(17, 26, 51, .88);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .7);
+      animation: chipFloat 5s ease-in-out infinite
+    }
+
+    .hero-photo__chip i {
+      color: var(--a)
+    }
+
+    .chip-1 {
+      top: 8%;
+      left: -6%
+    }
+
+    .chip-2 {
+      bottom: 12%;
+      left: -10%;
+      animation-delay: -1.5s
+    }
+
+    .chip-3 {
+      top: 42%;
+      right: -9%;
+      animation-delay: -3s
+    }
+
+    @keyframes photoFloat {
+      50% {
+        transform: translateY(-14px)
+      }
+    }
+
+    @keyframes chipFloat {
+      50% {
+        transform: translateY(-8px)
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    @media (max-width:575.98px) {
+      .hero-photo {
+        width: min(78%, 290px)
+      }
+
+      .hero-photo__chip {
+        font-size: .75rem;
+        padding: .4rem .75rem
+      }
+
+      .chip-1 {
+        left: -12%
+      }
+
+      .chip-2 {
+        left: -14%
+      }
+
+      .chip-3 {
+        right: -14%
+      }
+    }
+
+    @keyframes float {
+      50% {
+        transform: translateY(-16px) rotate(2deg)
+      }
+    }
+
+    /* boutons */
+    .btn-gradient {
+      background: var(--grad);
+      color: #fff;
+      border: 0;
+      transition: .3s;
+      box-shadow: 0 10px 30px -10px var(--b)
+    }
+
+    .btn-gradient:hover {
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px var(--b)
+    }
+
+    .btn-outline-light,
+    .btn-outline-primary {
+      transition: .3s
+    }
+
+    .btn-outline-light:hover,
+    .btn-outline-primary:hover {
+      transform: translateY(-3px)
+    }
+
+    .btn-cv {
+      border: 1px solid var(--a);
+      color: var(--a)
+    }
+
+    .btn-cv:hover {
+      background: var(--a);
+      color: #07101f
+    }
+
+    .btn-cv i {
+      display: inline-block;
+      transition: transform .3s
+    }
+
+    .btn-cv:hover i {
+      animation: down .7s infinite
+    }
+
+    @keyframes down {
+      50% {
+        transform: translateY(4px)
+      }
+    }
+
+    /* cartes + spotlight souris */
+    .custom-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      transition: transform .4s, box-shadow .4s, border-color .4s;
+      overflow: hidden;
+      position: relative
+    }
+
+    .custom-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .3s;
+      background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(124, 92, 255, .18), transparent 70%)
+    }
+
+    .custom-card:hover::before {
+      opacity: 1
+    }
+
+    .custom-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px -30px var(--b);
+      border-color: rgba(124, 92, 255, .5)
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-bottom: 1px solid var(--line);
+      transition: transform .6s
+    }
+
+    .proj-img {
+      overflow: hidden;
+      display: block
+    }
+
+    .custom-card:hover .card-img-top {
+      transform: scale(1.05)
+    }
+
+    /* badges + barres */
+    .skill-badge {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--line);
+      padding: .65rem 1.3rem;
+      border-radius: 99px;
+      font-weight: 600;
+      font-size: .92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      transition: .3s
+    }
+
+    .skill-badge i {
+      color: var(--a)
+    }
+
+    .skill-badge:hover {
+      border-color: var(--a);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px -10px var(--a)
+    }
+
+    .progress {
+      background: rgba(120, 140, 220, .14);
+      height: 9px;
+      border-radius: 99px
+    }
+
+    .progress-bar {
+      background: var(--grad);
+      border-radius: 99px;
+      width: 0;
+      transition: width 1.4s cubic-bezier(.2, .8, .2, 1)
+    }
+
+    .sk-val {
+      color: var(--text-main);
+      font-weight: 700
+    }
+
+    .contact-info-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: var(--grad);
+      display: grid;
+      place-items: center;
+      flex: none
+    }
+
+    .contact-info-icon i {
+      color: #fff;
+      font-size: 1.15rem
+    }
+
+    .form-control {
+      transition: .2s
+    }
+
+    .form-control:focus {
+      border-color: var(--a) !important;
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, .18) !important;
+      background: var(--bg-dark) !important;
+      color: #fff
+    }
+
+    .form-control::placeholder {
+      color: #7f8bb5;
+      opacity: 1
+    }
+
+    footer {
+      border-top: 1px solid var(--line)
+    }
+
+    /* retour en haut */
+    #toTop {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 0;
+      background: var(--grad);
+      color: #fff;
+      font-size: 1.2rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: .3s;
+      z-index: 1500
+    }
+
+    #toTop.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: none
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div id="progress"></div>
+  <div id="progress"></div>
 
-<nav id="navbar-main" class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
-  <div class="container">
-    <a class="navbar-brand fs-4" href="#accueil"><i class="bi bi-code-slash text-info me-2"></i>Cécilien.<span>dev</span></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Menu"><span class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto gap-1 align-items-lg-center">
-        <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
-        <li class="nav-item"><a class="nav-link" href="#a-propos">À propos</a></li>
-        <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
-        <li class="nav-item"><a class="nav-link" href="#projets">Projets</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<header id="accueil" class="hero-section text-center text-lg-start min-vh-100 d-flex align-items-center">
-  <div class="hero-bg-gradient"></div>
-  <div id="hero-particles"></div>
-  <div class="container">
-    <div class="row align-items-center justify-content-center">
-      <div class="col-12 col-lg-7" data-aos="fade-right" data-aos-duration="1000">
-        <span class="status mb-4"><i></i> Disponible pour de nouveaux projets</span>
-        <h1 class="display-4 fw-extrabold mb-3 text-white">
-          Bonjour, je suis <br class="d-none d-sm-inline">
-          <span class="gradient-text d-block d-sm-inline">BOTRALAHY</span>
-          <span class="gradient-text d-block d-sm-inline">Solofoson Cécilien</span>
-        </h1>
-        <div class="typed-line mb-3">Je suis <b id="typed"></b><span class="caret"></span></div>
-        <p class="lead text-white-50 mb-4 fs-6 mx-auto mx-lg-0" style="max-width:560px">
-          Je conçois et développe des solutions web sur mesure avec
-          <strong class="text-white">HTML5</strong>, <strong class="text-white">CSS3</strong>, <strong class="text-white">Bootstrap</strong>, <strong class="text-white">Tailwind CSS</strong>, <strong class="text-white">JavaScript</strong> et <strong class="text-white">Angular</strong>, jusqu’aux back-ends robustes avec <strong class="text-white">PHP</strong> et <strong class="text-white">Laravel</strong>.
-        </p>
-        <div class="d-flex flex-column flex-sm-row flex-wrap gap-3 justify-content-center justify-content-lg-start mt-4">
-          <a href="#projets" class="btn btn-gradient btn-lg px-4 py-3 rounded-pill fw-bold"><i class="bi bi-briefcase-fill me-2"></i>Voir mes projets</a>
-          <a href="cv/CV-Botralahy-Solofoson-Cecilien.pdf" download class="btn btn-cv btn-lg px-4 py-3 rounded-pill fw-bold"><i class="bi bi-download me-2"></i>Télécharger mon CV</a>
-          <a href="#contact" class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill fw-bold">Me contacter</a>
-        </div>
-      </div>
-      <div class="col-12 col-lg-5 text-center mt-5 mt-lg-0" data-aos="fade-left" data-aos-duration="1000">
-        <div class="hero-icon"><i class="bi bi-code-slash"></i></div>
+  <nav id="navbar-main" class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
+    <div class="container">
+      <a class="navbar-brand fs-4" href="#accueil"><i
+          class="bi bi-code-slash text-info me-2"></i>Cécilien.<span>dev</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-label="Menu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-1 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#a-propos">À propos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projets">Projets</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
       </div>
     </div>
-  </div>
-</header>
+  </nav>
 
-<section id="a-propos" class="py-5 bg-dark">
-  <div class="container py-5">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6" data-aos="fade-right">
-        <h6 class="text-info fw-bold mb-2">Présentation</h6>
-        <h2 class="display-5 fw-extrabold mb-4">À propos de moi</h2>
-        <p class="text-secondary lead">Développeur passionné et rigoureux, je mets en œuvre des technologies modernes pour concevoir des applications web dynamiques, sécurisées et performantes.</p>
-        <p class="text-secondary">Spécialisé dans le développement <strong class="text-white">Fullstack PHP/Laravel</strong>, je crée des architectures robustes et des interfaces élégantes, avec une expertise approfondie dans la gestion de CMS comme <strong class="text-white">WordPress</strong>.</p>
-        <div class="d-flex flex-wrap gap-3 mt-5">
-          <a href="https://www.nosyland.fr/" target="_blank" rel="noopener" class="btn btn-outline-primary rounded-pill fw-bold px-4"><i class="bi bi-globe me-2"></i>Visiter NosyLand.fr</a>
-          <a href="cv/CV-Botralahy-Solofoson-Cecilien.pdf" download class="btn btn-cv rounded-pill fw-bold px-4"><i class="bi bi-download me-2"></i>Télécharger mon CV</a>
-        </div>
-      </div>
-      <div class="col-lg-6" data-aos="fade-left">
-        <div class="custom-card p-4">
-          <h4 class="fw-bold mb-3 text-white"><i class="bi bi-person-badge text-info me-2"></i>Profil professionnel</h4>
-          <ul class="list-unstyled mb-0 text-secondary">
-            <li class="py-3 border-bottom" style="border-color:var(--line)!important"><strong class="text-white">Nom complet :</strong> BOTRALAHY Solofoson Cécilien</li>
-            <li class="py-3 border-bottom" style="border-color:var(--line)!important"><strong class="text-white">Rôle :</strong> Développeur Web Fullstack &amp; CMS</li>
-            <li class="py-3 border-bottom" style="border-color:var(--line)!important"><strong class="text-white">Technologies :</strong> Laravel (PHP), WordPress, JS, Bootstrap, GitHub, Angular</li>
-            <li class="py-3"><strong class="text-white">Site de référence :</strong> <a href="https://www.nosyland.fr/" target="_blank" rel="noopener" class="text-decoration-none fw-bold text-info">www.nosyland.fr</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="competences" class="py-5">
-  <div class="container py-5">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <h6 class="text-info fw-bold">Expertise</h6>
-      <h2 class="display-5 fw-extrabold">Compétences techniques</h2>
-    </div>
-    <div class="d-flex flex-wrap gap-3 justify-content-center" data-aos="fade-up" data-aos-delay="150">
-      <span class="skill-badge"><i class="bi bi-filetype-html"></i> HTML5 / CSS3</span>
-      <span class="skill-badge"><i class="bi bi-bootstrap-fill"></i> Bootstrap</span>
-      <span class="skill-badge"><i class="bi bi-palette-fill"></i> Tailwind CSS</span>
-      <span class="skill-badge"><i class="bi bi-filetype-js"></i> JavaScript</span>
-      <span class="skill-badge"><i class="bi bi-code-square"></i> jQuery</span>
-      <span class="skill-badge"><i class="bi bi-braces"></i> Angular</span>
-      <span class="skill-badge"><i class="bi bi-filetype-php"></i> PHP</span>
-      <span class="skill-badge"><i class="bi bi-layers-fill"></i> Laravel</span>
-      <span class="skill-badge"><i class="bi bi-database-fill"></i> MySQL</span>
-      <span class="skill-badge"><i class="bi bi-wordpress"></i> WordPress</span>
-      <span class="skill-badge"><i class="bi bi-github"></i> Git / GitHub</span>
-    </div>
-    <div class="row g-4 mt-4" id="skills"></div>
-  </div>
-</section>
-
-<section id="projets" class="py-5 bg-dark">
-  <div class="container py-5">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <h6 class="text-info fw-bold">Réalisations</h6>
-      <h2 class="display-5 fw-extrabold">Projets</h2>
-    </div>
-    <div class="row g-4 justify-content-center">
-      <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="150">
-        <div class="custom-card h-100">
-          <a href="https://www.nosyland.fr/" target="_blank" rel="noopener" class="proj-img"><img src="images/capturenosyland.png" class="card-img-top" alt="NosyLand"></a>
-          <div class="p-4">
-            <span class="badge rounded-pill text-bg-primary bg-opacity-25 mb-3">Laravel</span>
-            <h3 class="fw-extrabold text-white">NosyLand</h3>
-            <p class="text-secondary mb-4">Site e-commerce de produits malgaches développé avec Laravel (PHP) et MySQL, avec une interface responsive, une gestion des produits et des commandes, et un paiement en ligne sécurisé.</p>
-            <a href="https://www.nosyland.fr/" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm rounded-pill fw-bold">Visiter le site <i class="bi bi-box-arrow-up-right ms-2"></i></a>
+  <header id="accueil" class="hero-section text-center text-lg-start min-vh-100 d-flex align-items-center">
+    <div class="hero-bg-gradient"></div>
+    <div id="hero-particles"></div>
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-12 col-lg-7" data-aos="fade-right" data-aos-duration="1000">
+          <span class="status mb-4"><i></i> Disponible pour de nouveaux projets</span>
+          <h1 class="display-4 fw-extrabold mb-3 text-white">
+            Bonjour, je suis <br class="d-none d-sm-inline">
+            <span class="gradient-text d-block d-sm-inline">BOTRALAHY</span>
+            <span class="gradient-text d-block d-sm-inline">Solofoson Cécilien</span>
+          </h1>
+          <div class="typed-line mb-3">Je suis <b id="typed"></b><span class="caret"></span></div>
+          <p class="lead text-white-50 mb-4 fs-6 mx-auto mx-lg-0" style="max-width:560px">
+            Je conçois et développe des solutions web sur mesure avec
+            <strong class="text-white">HTML5</strong>, <strong class="text-white">CSS3</strong>, <strong
+              class="text-white">Bootstrap</strong>, <strong class="text-white">Tailwind CSS</strong>, <strong
+              class="text-white">JavaScript</strong> et <strong class="text-white">Angular</strong>, jusqu’aux back-ends
+            robustes avec <strong class="text-white">PHP</strong> et <strong class="text-white">Laravel</strong>.
+          </p>
+          <div
+            class="d-flex flex-column flex-sm-row flex-wrap gap-3 justify-content-center justify-content-lg-start mt-4">
+            <a href="#projets" class="btn btn-gradient btn-lg px-4 py-3 rounded-pill fw-bold"><i
+                class="bi bi-briefcase-fill me-2"></i>Voir mes projets</a>
+            <a href="CV/CV_BOTRALAHY_Solofoson_Cecilien.pdf" download
+              class="btn btn-cv btn-lg px-4 py-3 rounded-pill fw-bold"><i class="bi bi-download me-2"></i>Télécharger
+              mon CV</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill fw-bold">Me contacter</a>
           </div>
         </div>
-      </div>
-      <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="300">
-        <div class="custom-card h-100">
-          <a href="https://www.spaleromain.fr/" target="_blank" rel="noopener" class="proj-img"><img src="images/Capture d'écran 2026-10-05 133600.png" class="card-img-top" alt="Spa Le Romain"></a>
-          <div class="p-4">
-            <span class="badge rounded-pill text-bg-primary bg-opacity-25 mb-3">Laravel</span>
-            <h3 class="fw-extrabold text-white">Spa Le Romain</h3>
-            <p class="text-secondary mb-4">Site web dédié à la présentation et à la réservation des prestations du Spa Le Romain, développé avec Laravel (PHP) et MySQL, avec une interface responsive adaptée aux ordinateurs, tablettes et mobiles.</p>
-            <a href="https://www.spaleromain.fr/" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm rounded-pill fw-bold">Visiter le site <i class="bi bi-box-arrow-up-right ms-2"></i></a>
+        <div class="col-12 col-lg-5 text-center mt-5 mt-lg-0" data-aos="fade-left" data-aos-duration="1000">
+          <div class="hero-photo">
+            <div class="hero-photo__ring"></div>
+            <div class="hero-photo__frame"><img src="images/monPhoto.png" alt="Portrait de BOTRALAHY Solofoson Cécilien"
+                width="400" height="400" decoding="async"></div>
+            <span class="hero-photo__chip chip-1"><i class="bi bi-filetype-php"></i> PHP</span>
+            <span class="hero-photo__chip chip-2"><i class="bi bi-layers-fill"></i> Laravel</span>
+            <span class="hero-photo__chip chip-3"><i class="bi bi-wordpress"></i> WordPress</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<section id="contact" class="py-5">
-  <div class="container py-5" data-aos="fade-up">
-    <div class="text-center mb-5">
-      <h2 class="display-5 fw-extrabold text-white">Travaillons ensemble</h2>
-      <p class="text-secondary lead">Un projet web ou une opportunité de collaboration ? Contactez-moi !</p>
-    </div>
-    <div class="row g-4 mb-5 justify-content-center">
-      <div class="col-md-4"><div class="custom-card p-4 h-100 d-flex flex-row align-items-center gap-3">
-        <div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div>
-        <div><h6 class="text-white fw-bold mb-1">Téléphone</h6><p class="mb-0 small"><a href="tel:0348928833" class="text-secondary text-decoration-none">034 89 288 33</a></p></div>
-      </div></div>
-      <div class="col-md-4"><div class="custom-card p-4 h-100 d-flex flex-row align-items-center gap-3">
-        <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
-        <div class="overflow-hidden"><h6 class="text-white fw-bold mb-1">Email</h6><p class="mb-0 small text-truncate"><a href="mailto:solofosoncecilienbotralahy@gmail.com" class="text-secondary text-decoration-none">solofosoncecilienbotralahy@gmail.com</a></p></div>
-      </div></div>
-      <div class="col-md-4"><div class="custom-card p-4 h-100 d-flex flex-row align-items-center gap-3">
-        <div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div>
-        <div><h6 class="text-white fw-bold mb-1">Adresse</h6><p class="text-secondary mb-0 small">G305 TER Namehana</p></div>
-      </div></div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-lg-7">
-        <form id="contactForm" class="p-4 p-md-5 custom-card">
-          <input type="hidden" name="access_key" value="bdd6392d-4563-48ec-8abb-caf0968b80b4">
-          <input type="checkbox" name="botcheck" style="display:none">
-          <div class="row g-3">
-            <div class="col-md-6"><input type="text" name="name" id="name" class="form-control form-control-lg bg-dark text-white border-secondary border-opacity-25 p-3 fs-6" placeholder="Votre nom" required></div>
-            <div class="col-md-6"><input type="email" name="email" id="email" class="form-control form-control-lg bg-dark text-white border-secondary border-opacity-25 p-3 fs-6" placeholder="Votre email" required></div>
-            <div class="col-12 mt-3"><textarea name="message" id="message" class="form-control bg-dark text-white border-secondary border-opacity-25 p-3 fs-6" rows="5" placeholder="Votre message" required></textarea></div>
-            <div class="col-12 mt-4"><button type="submit" id="submitBtn" class="btn btn-gradient btn-lg w-100 py-3 rounded-pill fw-bold"><i class="bi bi-send me-2"></i>Envoyer le message</button></div>
+  <section id="a-propos" class="py-5 bg-dark">
+    <div class="container py-5">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h6 class="text-info fw-bold mb-2">Présentation</h6>
+          <h2 class="display-5 fw-extrabold mb-4">À propos de moi</h2>
+          <p class="text-secondary lead">Développeur passionné et rigoureux, je mets en œuvre des technologies modernes
+            pour concevoir des applications web dynamiques, sécurisées et performantes.</p>
+          <p class="text-secondary">Spécialisé dans le développement <strong class="text-white">Fullstack
+              PHP/Laravel</strong>, je crée des architectures robustes et des interfaces élégantes, avec une expertise
+            approfondie dans la gestion de CMS comme <strong class="text-white">WordPress</strong>.</p>
+          <div class="d-flex flex-wrap gap-3 mt-5">
+            <a href="https://www.nosyland.fr/" target="_blank" rel="noopener"
+              class="btn btn-outline-primary rounded-pill fw-bold px-4"><i class="bi bi-globe me-2"></i>Visiter
+              NosyLand.fr</a>
+            <a href="CV/CV_BOTRALAHY_Solofoson_Cecilien.pdf" download class="btn btn-cv rounded-pill fw-bold px-4"><i
+                class="bi bi-download me-2"></i>Télécharger mon CV</a>
           </div>
-          <div id="formResponse" class="mt-3 text-center" role="status"></div>
-        </form>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="custom-card p-4">
+            <h4 class="fw-bold mb-3 text-white"><i class="bi bi-person-badge text-info me-2"></i>Profil professionnel
+            </h4>
+            <ul class="list-unstyled mb-0 text-secondary">
+              <li class="py-3 border-bottom" style="border-color:var(--line)!important"><strong class="text-white">Nom
+                  complet :</strong> BOTRALAHY Solofoson Cécilien</li>
+              <li class="py-3 border-bottom" style="border-color:var(--line)!important"><strong class="text-white">Rôle
+                  :</strong> Développeur Web Fullstack &amp; CMS</li>
+              <li class="py-3 border-bottom" style="border-color:var(--line)!important"><strong
+                  class="text-white">Technologies :</strong> Laravel (PHP), WordPress, JS, Bootstrap, GitHub, Angular
+              </li>
+              <li class="py-3"><strong class="text-white">Site de référence :</strong> <a
+                  href="https://www.nosyland.fr/" target="_blank" rel="noopener"
+                  class="text-decoration-none fw-bold text-info">www.nosyland.fr</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="py-5 bg-dark text-center text-secondary">
-  <div class="container"><p class="mb-0 small">&copy; 2026 Solofoson Cécilien. Tous droits réservés.</p></div>
-</footer>
+  <section id="competences" class="py-5">
+    <div class="container py-5">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h6 class="text-info fw-bold">Expertise</h6>
+        <h2 class="display-5 fw-extrabold">Compétences techniques</h2>
+      </div>
+      <div class="d-flex flex-wrap gap-3 justify-content-center" data-aos="fade-up" data-aos-delay="150">
+        <span class="skill-badge"><i class="bi bi-filetype-html"></i> HTML5 / CSS3</span>
+        <span class="skill-badge"><i class="bi bi-bootstrap-fill"></i> Bootstrap</span>
+        <span class="skill-badge"><i class="bi bi-palette-fill"></i> Tailwind CSS</span>
+        <span class="skill-badge"><i class="bi bi-filetype-js"></i> JavaScript</span>
+        <span class="skill-badge"><i class="bi bi-code-square"></i> jQuery</span>
+        <span class="skill-badge"><i class="bi bi-braces"></i> Angular</span>
+        <span class="skill-badge"><i class="bi bi-filetype-php"></i> PHP</span>
+        <span class="skill-badge"><i class="bi bi-layers-fill"></i> Laravel</span>
+        <span class="skill-badge"><i class="bi bi-database-fill"></i> MySQL</span>
+        <span class="skill-badge"><i class="bi bi-wordpress"></i> WordPress</span>
+        <span class="skill-badge"><i class="bi bi-github"></i> Git / GitHub</span>
+      </div>
+      <div class="row g-4 mt-4" id="skills"></div>
+    </div>
+  </section>
 
-<button id="toTop" aria-label="Retour en haut"><i class="bi bi-arrow-up"></i></button>
+  <section id="projets" class="py-5 bg-dark">
+    <div class="container py-5">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h6 class="text-info fw-bold">Réalisations</h6>
+        <h2 class="display-5 fw-extrabold">Projets</h2>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="150">
+          <div class="custom-card h-100">
+            <a href="https://www.nosyland.fr/" target="_blank" rel="noopener" class="proj-img"><img
+                src="images/capturenosyland.png" class="card-img-top" alt="NosyLand"></a>
+            <div class="p-4">
+              <span class="badge rounded-pill text-bg-primary bg-opacity-25 mb-3">Laravel</span>
+              <h3 class="fw-extrabold text-white">NosyLand</h3>
+              <p class="text-secondary mb-4">Site e-commerce de produits malgaches développé avec Laravel (PHP) et
+                MySQL, avec une interface responsive, une gestion des produits et des commandes, et un paiement en ligne
+                sécurisé.</p>
+              <a href="https://www.nosyland.fr/" target="_blank" rel="noopener"
+                class="btn btn-outline-primary btn-sm rounded-pill fw-bold">Visiter le site <i
+                  class="bi bi-box-arrow-up-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="custom-card h-100">
+            <a href="https://www.spaleromain.fr/" target="_blank" rel="noopener" class="proj-img"><img
+                src="images/Capture d'écran 2026-10-05 133600.png" class="card-img-top" alt="Spa Le Romain"></a>
+            <div class="p-4">
+              <span class="badge rounded-pill text-bg-primary bg-opacity-25 mb-3">Laravel</span>
+              <h3 class="fw-extrabold text-white">Spa Le Romain</h3>
+              <p class="text-secondary mb-4">Site web dédié à la présentation et à la réservation des prestations du Spa
+                Le Romain, développé avec Laravel (PHP) et MySQL, avec une interface responsive adaptée aux ordinateurs,
+                tablettes et mobiles.</p>
+              <a href="https://www.spaleromain.fr/" target="_blank" rel="noopener"
+                class="btn btn-outline-primary btn-sm rounded-pill fw-bold">Visiter le site <i
+                  class="bi bi-box-arrow-up-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-AOS.init({duration:800,once:true});
+  <section id="contact" class="py-5">
+    <div class="container py-5" data-aos="fade-up">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-extrabold text-white">Travaillons ensemble</h2>
+        <p class="text-secondary lead">Un projet web ou une opportunité de collaboration ? Contactez-moi !</p>
+      </div>
+      <div class="row g-4 mb-5 justify-content-center">
+        <div class="col-md-4">
+          <div class="custom-card p-4 h-100 d-flex flex-row align-items-center gap-3">
+            <div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div>
+            <div>
+              <h6 class="text-white fw-bold mb-1">Téléphone</h6>
+              <p class="mb-0 small"><a href="tel:0348928833" class="text-secondary text-decoration-none">034 89 288
+                  33</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-card p-4 h-100 d-flex flex-row align-items-center gap-3">
+            <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
+            <div class="overflow-hidden">
+              <h6 class="text-white fw-bold mb-1">Email</h6>
+              <p class="mb-0 small text-truncate"><a href="mailto:solofosoncecilienbotralahy@gmail.com"
+                  class="text-secondary text-decoration-none">solofosoncecilienbotralahy@gmail.com</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="custom-card p-4 h-100 d-flex flex-row align-items-center gap-3">
+            <div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+            <div>
+              <h6 class="text-white fw-bold mb-1">Adresse</h6>
+              <p class="text-secondary mb-0 small">G305 TER Namehana</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-7">
+          <form id="contactForm" class="p-4 p-md-5 custom-card">
+            <input type="hidden" name="access_key" value="bdd6392d-4563-48ec-8abb-caf0968b80b4">
+            <input type="checkbox" name="botcheck" style="display:none">
+            <div class="row g-3">
+              <div class="col-md-6"><input type="text" name="name" id="name"
+                  class="form-control form-control-lg bg-dark text-white border-secondary border-opacity-25 p-3 fs-6"
+                  placeholder="Votre nom" required></div>
+              <div class="col-md-6"><input type="email" name="email" id="email"
+                  class="form-control form-control-lg bg-dark text-white border-secondary border-opacity-25 p-3 fs-6"
+                  placeholder="Votre email" required></div>
+              <div class="col-12 mt-3"><textarea name="message" id="message"
+                  class="form-control bg-dark text-white border-secondary border-opacity-25 p-3 fs-6" rows="5"
+                  placeholder="Votre message" required></textarea></div>
+              <div class="col-12 mt-4"><button type="submit" id="submitBtn"
+                  class="btn btn-gradient btn-lg w-100 py-3 rounded-pill fw-bold"><i class="bi bi-send me-2"></i>Envoyer
+                  le message</button></div>
+            </div>
+            <div id="formResponse" class="mt-3 text-center" role="status"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-document.addEventListener("DOMContentLoaded",function(){
-  var $=function(s){return document.querySelector(s)};
-  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  <footer class="py-5 bg-dark text-center text-secondary">
+    <div class="container">
+      <p class="mb-0 small">&copy; 2026 Solofoson Cécilien. Tous droits réservés.</p>
+    </div>
+  </footer>
 
-  /* ScrollSpy */
-  /* Lien actif selon la section visible (remplace ScrollSpy) */
-  var navLinks=[].slice.call(document.querySelectorAll(".navbar-nav .nav-link"));
-  var secs=navLinks.map(function(a){return document.querySelector(a.getAttribute("href"))});
-  function spy(){
-    var y=window.scrollY+140,cur=0;
-    secs.forEach(function(s,i){if(s.offsetTop<=y)cur=i});
-    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)cur=secs.length-1;
-    navLinks.forEach(function(a,i){a.classList.toggle("active",i===cur)});
-  }
-  addEventListener("scroll",spy,{passive:true});
-  addEventListener("resize",spy);
-  spy();
-  var collapse=$("#navbarNav");
-  document.querySelectorAll(".navbar-nav .nav-link").forEach(function(l){
-    l.addEventListener("click",function(){
-      if(collapse.classList.contains("show"))bootstrap.Collapse.getOrCreateInstance(collapse).hide();
+  <button id="toTop" aria-label="Retour en haut"><i class="bi bi-arrow-up"></i></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var $ = function (s) { return document.querySelector(s) };
+      var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* ScrollSpy */
+      /* Lien actif selon la section visible (remplace ScrollSpy) */
+      var navLinks = [].slice.call(document.querySelectorAll(".navbar-nav .nav-link"));
+      var secs = navLinks.map(function (a) { return document.querySelector(a.getAttribute("href")) });
+      function spy() {
+        var y = window.scrollY + 140, cur = 0;
+        secs.forEach(function (s, i) { if (s.offsetTop <= y) cur = i });
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = secs.length - 1;
+        navLinks.forEach(function (a, i) { a.classList.toggle("active", i === cur) });
+      }
+      addEventListener("scroll", spy, { passive: true });
+      addEventListener("resize", spy);
+      spy();
+      var collapse = $("#navbarNav");
+      document.querySelectorAll(".navbar-nav .nav-link").forEach(function (l) {
+        l.addEventListener("click", function () {
+          if (collapse.classList.contains("show")) bootstrap.Collapse.getOrCreateInstance(collapse).hide();
+        });
+      });
+
+      /* Compétences (barres animées au défilement) */
+      var groups = [
+        ["bi-layout-text-sidebar-reverse", "Front-End", [["HTML / CSS", 95], ["Bootstrap / Tailwind", 90], ["JavaScript / Angular", 82]]],
+        ["bi-server", "Back-End", [["PHP / Laravel", 88], ["MySQL", 85], ["API / AJAX", 80]]],
+        ["bi-tools", "CMS &amp; Outils", [["WordPress", 92], ["Git / GitHub", 85], ["Responsive Design", 90]]]
+      ];
+      $("#skills").innerHTML = groups.map(function (g, i) {
+        return '<div class="col-lg-4" data-aos="fade-up" data-aos-delay="' + i * 120 + '"><div class="custom-card p-4 h-100">' +
+          '<h5 class="fw-bold text-white mb-4"><i class="bi ' + g[0] + ' text-info me-2"></i>' + g[1] + '</h5>' +
+          g[2].map(function (s) { return '<div class="mb-4"><div class="d-flex justify-content-between mb-2 small text-secondary"><span>' + s[0] + '</span><span class="sk-val">' + s[1] + '%</span></div><div class="progress"><div class="progress-bar" data-w="' + s[1] + '"></div></div></div>' }).join("") +
+          '</div></div>';
+      }).join("");
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.querySelectorAll(".progress-bar").forEach(function (b) { b.style.width = b.dataset.w + "%" });
+          io.unobserve(e.target);
+        });
+      }, { threshold: .3 });
+      document.querySelectorAll("#skills .custom-card").forEach(function (c) { io.observe(c) });
+
+      /* Texte tapé */
+      var words = ["Développeur Fullstack", "Spécialiste Laravel", "Expert WordPress", "Créateur d’interfaces"], wi = 0, ci = 0, del = false, t = $("#typed");
+      if (reduce) { t.textContent = words[0] } else (function tick() {
+        var w = words[wi]; t.textContent = w.slice(0, ci);
+        if (!del && ci === w.length) { del = true; return setTimeout(tick, 1600) }
+        if (del && ci === 0) { del = false; wi = (wi + 1) % words.length }
+        ci += del ? -1 : 1; setTimeout(tick, del ? 35 : 70);
+      })();
+
+      /* Spotlight sur les cartes */
+      document.querySelectorAll(".custom-card").forEach(function (c) {
+        c.addEventListener("pointermove", function (e) {
+          var r = c.getBoundingClientRect();
+          c.style.setProperty("--mx", (e.clientX - r.left) + "px");
+          c.style.setProperty("--my", (e.clientY - r.top) + "px");
+        });
+      });
+
+      /* Progression + retour en haut */
+      var top = $("#toTop");
+      addEventListener("scroll", function () {
+        var h = document.documentElement;
+        $("#progress").style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
+        top.classList.toggle("show", h.scrollTop > 600);
+      }, { passive: true });
+      top.onclick = function () { scrollTo({ top: 0, behavior: "smooth" }) };
+
+      /* Particules */
+      if (!reduce) particlesJS("hero-particles", {
+        particles: {
+          number: { value: 55, density: { enable: true, value_area: 800 } }, color: { value: "#7c5cff" }, shape: { type: "circle" },
+          opacity: { value: .25, random: true }, size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 150, color: "#22d3ee", opacity: .12, width: 1 },
+          move: { enable: true, speed: 1.4, direction: "none", random: true, straight: false, out_mode: "out", bounce: false }
+        },
+        interactivity: {
+          detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+          modes: { repulse: { distance: 100, duration: .4 }, push: { particles_nb: 4 } }
+        },
+        retina_detect: true
+      });
     });
-  });
 
-  /* Compétences (barres animées au défilement) */
-  var groups=[
-    ["bi-layout-text-sidebar-reverse","Front-End",[["HTML / CSS",95],["Bootstrap / Tailwind",90],["JavaScript / Angular",82]]],
-    ["bi-server","Back-End",[["PHP / Laravel",88],["MySQL",85],["API / AJAX",80]]],
-    ["bi-tools","CMS &amp; Outils",[["WordPress",92],["Git / GitHub",85],["Responsive Design",90]]]
-  ];
-  $("#skills").innerHTML=groups.map(function(g,i){
-    return '<div class="col-lg-4" data-aos="fade-up" data-aos-delay="'+i*120+'"><div class="custom-card p-4 h-100">'+
-      '<h5 class="fw-bold text-white mb-4"><i class="bi '+g[0]+' text-info me-2"></i>'+g[1]+'</h5>'+
-      g[2].map(function(s){return '<div class="mb-4"><div class="d-flex justify-content-between mb-2 small text-secondary"><span>'+s[0]+'</span><span class="sk-val">'+s[1]+'%</span></div><div class="progress"><div class="progress-bar" data-w="'+s[1]+'"></div></div></div>'}).join("")+
-      '</div></div>';
-  }).join("");
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(!e.isIntersecting)return;
-      e.target.querySelectorAll(".progress-bar").forEach(function(b){b.style.width=b.dataset.w+"%"});
-      io.unobserve(e.target);
+    /* Formulaire (Web3Forms) */
+    var form = document.getElementById("contactForm"), resp = document.getElementById("formResponse"), btn = document.getElementById("submitBtn");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Envoi en cours…';
+      fetch("https://api.web3forms.com/submit", { method: "POST", body: new FormData(form) })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.status == 200, j: j } }) })
+        .then(function (x) {
+          if (x.ok) { resp.innerHTML = '<span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-2"></i>Message envoyé avec succès !</span>'; form.reset() }
+          else resp.innerHTML = '<span class="text-danger">' + x.j.message + '</span>';
+        })
+        .catch(function () { resp.innerHTML = '<span class="text-danger">Une erreur est survenue. Veuillez réessayer.</span>' })
+        .then(function () {
+          btn.disabled = false; btn.innerHTML = '<i class="bi bi-send me-2"></i>Envoyer le message';
+          setTimeout(function () { resp.innerHTML = "" }, 5000);
+        });
     });
-  },{threshold:.3});
-  document.querySelectorAll("#skills .custom-card").forEach(function(c){io.observe(c)});
-
-  /* Texte tapé */
-  var words=["Développeur Fullstack","Spécialiste Laravel","Expert WordPress","Créateur d’interfaces"],wi=0,ci=0,del=false,t=$("#typed");
-  if(reduce){t.textContent=words[0]}else(function tick(){
-    var w=words[wi];t.textContent=w.slice(0,ci);
-    if(!del&&ci===w.length){del=true;return setTimeout(tick,1600)}
-    if(del&&ci===0){del=false;wi=(wi+1)%words.length}
-    ci+=del?-1:1;setTimeout(tick,del?35:70);
-  })();
-
-  /* Spotlight sur les cartes */
-  document.querySelectorAll(".custom-card").forEach(function(c){
-    c.addEventListener("pointermove",function(e){
-      var r=c.getBoundingClientRect();
-      c.style.setProperty("--mx",(e.clientX-r.left)+"px");
-      c.style.setProperty("--my",(e.clientY-r.top)+"px");
-    });
-  });
-
-  /* Progression + retour en haut */
-  var top=$("#toTop");
-  addEventListener("scroll",function(){
-    var h=document.documentElement;
-    $("#progress").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";
-    top.classList.toggle("show",h.scrollTop>600);
-  },{passive:true});
-  top.onclick=function(){scrollTo({top:0,behavior:"smooth"})};
-
-  /* Particules */
-  if(!reduce)particlesJS("hero-particles",{
-    particles:{number:{value:55,density:{enable:true,value_area:800}},color:{value:"#7c5cff"},shape:{type:"circle"},
-      opacity:{value:.25,random:true},size:{value:3,random:true},
-      line_linked:{enable:true,distance:150,color:"#22d3ee",opacity:.12,width:1},
-      move:{enable:true,speed:1.4,direction:"none",random:true,straight:false,out_mode:"out",bounce:false}},
-    interactivity:{detect_on:"canvas",events:{onhover:{enable:true,mode:"repulse"},onclick:{enable:true,mode:"push"},resize:true},
-      modes:{repulse:{distance:100,duration:.4},push:{particles_nb:4}}},
-    retina_detect:true
-  });
-});
-
-/* Formulaire (Web3Forms) */
-var form=document.getElementById("contactForm"),resp=document.getElementById("formResponse"),btn=document.getElementById("submitBtn");
-form.addEventListener("submit",function(e){
-  e.preventDefault();
-  btn.disabled=true;
-  btn.innerHTML='<span class="spinner-border spinner-border-sm me-2" role="status"></span>Envoi en cours…';
-  fetch("https://api.web3forms.com/submit",{method:"POST",body:new FormData(form)})
-    .then(function(r){return r.json().then(function(j){return{ok:r.status==200,j:j}})})
-    .then(function(x){
-      if(x.ok){resp.innerHTML='<span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-2"></i>Message envoyé avec succès !</span>';form.reset()}
-      else resp.innerHTML='<span class="text-danger">'+x.j.message+'</span>';
-    })
-    .catch(function(){resp.innerHTML='<span class="text-danger">Une erreur est survenue. Veuillez réessayer.</span>'})
-    .then(function(){
-      btn.disabled=false;btn.innerHTML='<i class="bi bi-send me-2"></i>Envoyer le message';
-      setTimeout(function(){resp.innerHTML=""},5000);
-    });
-});
-</script>
+  </script>
 </body>
+
 </html>
